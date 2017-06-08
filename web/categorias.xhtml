@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputScript library="js" name="funcoes.js" />
+    </h:head>
+    <h:body>
+        
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Id:" for="id" />
+                    <h:inputText id="id" value="#{categoriaBean.categoria.id}" title="Id" readonly="true"/>
+                    <h:outputLabel value="Descricao:" for="descricao" />
+                    <h:inputText id="descricao" value="#{categoriaBean.categoria.descricao}" title="Descricao" />
+                </h:panelGrid>
+                <h:commandButton value="Novo" action="#{categoriaBean.novo()}"></h:commandButton>
+                <h:commandButton value="Salvar" action="#{categoriaBean.salvar()}"></h:commandButton>
+            </h:form>
+        </f:view>
+
+        
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <h:dataTable value="#{categoriaBean.categorias}" var="item" border="1">
+                    <f:facet name="header">
+                            <h:outputText value="TABELA DE CATEGORIAS"/>
+                        </f:facet>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descricao"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descricao}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:commandLink action="#{categoriaBean.editar(item)}">
+                            <h:graphicImage library="img" name="editar.jpg" style="width: 32px; height: 32px;" />
+                        </h:commandLink>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Apagar"/>
+                        </f:facet>
+                        <h:commandLink action="#{categoriaBean.apagar(item)}" onclick="return verifica();">
+                            <h:graphicImage library="img" name="apagar.jpg" style="width: 32px; height: 32px;" />
+                        </h:commandLink>
+                    </h:column>
+                    
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+
